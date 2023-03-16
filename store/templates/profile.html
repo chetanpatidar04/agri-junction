@@ -11,12 +11,11 @@
   alertify.set('notifier', 'delay', delay);
 </script>
 {% endif %}
-
 <div class="container-fluid mt-3">
   <div class="border border-secondary rounded p-4 m-4">
     <div class="card border mx-auto">
       <div class="p-3 card-header text-primary">
-        <h4>{{request.session.customer_firstname }}&nbsp;{{ request.session.customer_lastname }}</h4>
+        <h4>{{request.session.customer_firstname}}&nbsp;{{ request.session.customer_lastname }}</h4>
       </div>
       <div class="card-body text-dark">
         <div class="row">
@@ -216,8 +215,8 @@
                         </div>
                       </div>
                       <button type="submit" class="btn btn-primary" data-toggle="modal" id="save_change"
-                            data-target="#exampleModal" disabled="disabled">
-                            Save Changes
+                        data-target="#exampleModal" disabled="disabled">
+                        Save Changes
                       </button>
                 </form>
                 <script>
@@ -263,46 +262,47 @@
               <form action="/password_update" method="POST" class="needs-validation" novalidate>
                 <div class="card">
                   <div class="card-body">
-                {% csrf_token %}
-                {% if error %}
-                <div class="alert alert-danger" role="alert">
-                  {{error}}
-                </div>
-                {%endif%}
-                <center>
-                  <div class="col-md-5 mb-3">
-                    <label class="float-left">Old Password</label>
-                    <input type="password" name="old_password" class="form-control form-control-sm" maxlength="200"
-                      required>
+                    {% csrf_token %}
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                      {{error}}
+                    </div>
+                    {%endif%}
+                    <center>
+                      <div class="col-md-5 mb-3">
+                        <label class="float-left">Old Password</label>
+                        <input type="password" name="old_password" class="form-control form-control-sm" maxlength="200"
+                          required>
+                      </div>
+                      <div class="col-md-5 mb-3">
+                        <label for="validationCustom04" class="float-left">New Password</label>
+                        <input type="password" name="new_password" class="form-control form-control-sm"
+                          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="200" required>
+                        <div class="float-left invalid-feedback">
+                          Must contain at least one number and one uppercase and lowercase letter, and at least 8 or
+                          more characters
+                        </div>
+                        <div class="valid-feedback">
+                          Looks good!
+                        </div>
+                      </div>
+                      <div class="col-md-5 mb-3">
+                        <label for="validationCustom04" class="float-left">Confirm Password</label>
+                        <input type="password" name="confirm_password" class="form-control form-control-sm"
+                          id="validationCustom04" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="200"
+                          required>
+                        <div class=" invalid-feedback float-left">
+                          Must contain at least one number and one uppercase and lowercase letter, and at least 8 or
+                          more
+                          characters
+                        </div>
+                        <div class="valid-feedback float-left">
+                          Looks good!
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-sm btn-secondary">Update Password</button>
+                    </center>
                   </div>
-                  <div class="col-md-5 mb-3">
-                    <label for="validationCustom04" class="float-left">New Password</label>
-                    <input type="password" name="new_password" class="form-control form-control-sm"
-                      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="200" required>
-                    <div class="float-left invalid-feedback">
-                      Must contain at least one number and one uppercase and lowercase letter, and at least 8 or
-                      more characters
-                    </div>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
-                  </div>
-                  <div class="col-md-5 mb-3">
-                    <label for="validationCustom04" class="float-left">Confirm Password</label>
-                    <input type="password" name="confirm_password" class="form-control form-control-sm"
-                      id="validationCustom04" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="200" required>
-                    <div class=" invalid-feedback float-left">
-                      Must contain at least one number and one uppercase and lowercase letter, and at least 8 or
-                      more
-                      characters
-                    </div>
-                    <div class="valid-feedback float-left">
-                      Looks good!
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-sm btn-secondary">Update Password</button>
-                </center>
-                </div>
                 </div>
               </form>
               <script>
@@ -345,6 +345,7 @@
             <div class="card-body">
               <h3 class="alert alert-light border-secondary rounded text-center"> My Orders</h3>
               {% if orders %}
+              {% if my_orders %}
               {% for order in my_orders %}
               <div class="card mb-3">
                 <div class="row">
@@ -375,7 +376,12 @@
               </div>
               {% endfor %}
               {% else%}
-              <h5 class="card-title">No orders placed</h5>
+              <center>
+                <img src="data:image/jpeg;base64,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"
+                  class="img-fluid" alt="Responsive image">
+                <h5 class="card-title">No orders placed</h5>
+              </center>
+              {% endif %}
               {% endif%}
               <!-- cutomer -->
             </div>

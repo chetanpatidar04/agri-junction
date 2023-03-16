@@ -10,8 +10,8 @@ class View_order(View):
         customer = request.session.get("customer")
         my_orders = Order.get_orders_by_customer(customer)
         my_orders = my_orders[::-1]
-        # return orders
         orders = True
+        print("my_orderss",my_orders)
         return render(request,'profile.html', {"orders": orders,"my_orders":my_orders})
 
 # def orders(request):

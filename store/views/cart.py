@@ -19,7 +19,6 @@ class Cart(View):
             request.session["address"] = request.POST.get("address","") 
             request.session["mob_number"] = request.POST.get("mob_number","")
             request.session["pincode"] = request.POST.get("pin_code","")
-            print(request.session["address"],request.session["mob_number"],request.session["pincode"],"my adress")
             self.update_address = True
             return Cart.get(self, request)    
         quantity = cart.get(prod_id)

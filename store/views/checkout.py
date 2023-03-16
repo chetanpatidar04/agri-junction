@@ -4,7 +4,7 @@ from ..models.customer import Customer
 from django.views import View
 from store.models.product import Product
 from store.models.orders import Order
-
+from django.shortcuts import render
 
 class Checkout(View):
     def post(self, request):        
@@ -23,6 +23,7 @@ class Checkout(View):
                           mob_number = request.session.get("mob_number","N/A"))
             order.place_order()
         request.session["cart"] = OrderedDict()
+        order_placed = True
         if order_page_flag:
             return redirect("view_order")
-        return redirect("cart")
+        return render(request, 'cart.html', {'order_placed': order_placed})
