@@ -2,8 +2,7 @@ from email.headerregistry import Address
 from django.db import models
 from .product import Product
 from .customer import Customer
-import datetime
-
+from django.utils import timezone
 
 class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -11,8 +10,8 @@ class Order(models.Model):
     quantity = models.IntegerField(default=1)
     price = models.IntegerField()
     address = models.CharField(max_length=50, default="", blank=True)
-    mob_number = models.CharField(max_length=12, default="", blank=True)
-    date = models.DateTimeField(default=datetime.datetime.today())
+    mob_number = models.IntegerField(blank=False)
+    date = models.DateTimeField(default=timezone.now())
     status = models.BooleanField(default=False)
 
     def place_order(self):
